@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Southside Restaurant</title>
+    <style>
+        body { margin: 0; font-family: 'Segoe UI', sans-serif; background-color: #fafafa; color: #333; }
+        header { background-color: #ff4d4d; padding: 20px; text-align: center; color: white; font-size: 3rem; font-weight: bold; }
+        nav { background-color: #ff9999; display: flex; justify-content: center; gap: 30px; padding: 15px; }
+        nav a { text-decoration: none; color: white; font-weight: bold; font-size: 1.2rem; }
+        .hero { text-align: center; padding: 50px; background: url('{{ url_for("static", filename="images/hero.jpg") }}') no-repeat center/cover; color: white; }
+        .hero h2 { font-size: 2.5rem; background: rgba(0,0,0,0.5); display: inline-block; padding: 10px 20px; }
+        .food-images { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; margin: 20px; }
+        .food-images img { width: 250px; height: 180px; object-fit: cover; border-radius: 10px; }
+        .section { padding: 30px; max-width: 900px; margin: auto; }
+        .about { background: #ffe6e6; border-radius: 8px; padding: 20px; }
+        .address { background: #e6ffe6; border-radius: 8px; padding: 20px; margin-top: 20px; }
+        .menu-button { display: block; width: 200px; margin: 30px auto; padding: 15px; text-align: center; background-color: #ff4d4d; color: white; font-weight: bold; border-radius: 5px; text-decoration: none; font-size: 1.2rem; }
+    </style>
+</head>
+<body>
+<header>Southside Restaurant</header>
+<nav>
+    <a href="#about">About</a>
+    <a href="#address">Address</a>
+    <a href="/menu">Menu</a>
+</nav>
+
+<div class="hero">
+    <h2>Taste the Authentic Sivagangai Flavors</h2>
+</div>
+
+<div class="food-images">
+    <img src="{{ url_for('static', filename='images/chicken_biryani.jpg') }}" alt="Chicken">
+    <img src="{{ url_for('static', filename='images/mutton_biryani.jpg') }}" alt="Biryani">
+    <img src="{{ url_for('static', filename='images/dosa.jpg') }}" alt="Dosa">
+    <img src="{{ url_for('static', filename='images/parotta.jpg') }}" alt="Parotta">
+    <img src="{{ url_for('static', filename='images/idly.jpg') }}" alt="Idly">
+</div>
+
+<a class="menu-button" href="/menu">View Menu</a>
+
+<div class="section about" id="about">
+    <h2>About Us</h2>
+    <p>
+        In the heart of Tamil Nadu, Sivagangai cuisine blends the bold flavors of Chettinad spices
+        with the warmth of traditional South Indian cooking. Every dish is prepared with freshly ground masalas,
+        rich coconut gravies, and slow-cooked meats that burst with aroma. From fluffy parottas to fiery chicken biryani,
+        Sivagangai food is a celebration of taste and tradition.
+    </p>
+</div>
+
+<div class="section address" id="address">
+    <h2>Our Address</h2>
+    <p>777 Southside Street, OMR, Chennai</p>
+</div>
+</body>
+</html>

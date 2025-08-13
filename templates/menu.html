@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Menu</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; background: #f9f9f9; }
+        h1 { text-align: center; color: #ff4d4d; }
+        form { max-width: 800px; margin: auto; background: white; padding: 20px; border-radius: 10px; }
+        h2 { border-bottom: 2px solid #ff4d4d; padding-bottom: 5px; color: #333; }
+        .item { display: flex; justify-content: space-between; padding: 8px 0; }
+        input[type="number"] { width: 60px; }
+        button { margin-top: 20px; padding: 10px 20px; background: #ff4d4d; color: white; border: none; border-radius: 5px; font-size: 1rem; }
+    </style>
+</head>
+<body>
+    <h1>Our Menu</h1>
+    <form action="/order" method="POST">
+        <h2>Main Course</h2>
+        {% for dish in dishes %}
+        <div class="item">
+            <span>{{ dish.name }} - ₹{{ dish.price }}</span>
+            <input type="number" name="{{ dish.name }}" min="0" value="0">
+        </div>
+        {% endfor %}
+
+        <h2>Drinks</h2>
+        {% for drink in drinks %}
+        <div class="item">
+            <span>{{ drink.name }} - ₹{{ drink.price }}</span>
+            <input type="number" name="{{ drink.name }}" min="0" value="0">
+        </div>
+        {% endfor %}
+
+        <h2>Desserts</h2>
+        {% for dessert in desserts %}
+        <div class="item">
+            <span>{{ dessert.name }} - ₹{{ dessert.price }}</span>
+            <input type="number" name="{{ dessert.name }}" min="0" value="0">
+        </div>
+        {% endfor %}
+
+        <button type="submit">Place Order</button>
+    </form>
+</body>
+</html>
