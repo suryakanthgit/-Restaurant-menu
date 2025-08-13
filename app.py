@@ -2,7 +2,7 @@ from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
-# ===== OOP CLASSES =====
+
 class Food:
     def __init__(self, name, price):
         self.name = name
@@ -20,7 +20,7 @@ class Drink(Food):
 class Dessert(Food):
     category = "Dessert"
 
-# ===== MENU DATA =====
+
 menu_items = [
     Dish("Sivagangai Chicken Biryani", 150),
     Dish("Sivagangai Mutton Biryani", 200),
@@ -37,17 +37,17 @@ menu_items = [
     Dessert("Fruit Salad", 80),
 ]
 
-# ===== STORE ORDERS =====
+
 orders = []
 
-# ===== ROUTES =====
+
 @app.route("/")
 def index():
     return render_template("home.html")
 
 @app.route("/menu")
 def menu():
-    # Group items by category for menu page styling
+
     dishes = [item for item in menu_items if isinstance(item, Dish)]
     drinks = [item for item in menu_items if isinstance(item, Drink)]
     desserts = [item for item in menu_items if isinstance(item, Dessert)]
