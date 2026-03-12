@@ -9,8 +9,9 @@ def home():
 
 
 # Menu page
-@app.route("/menu")
+@app.route("/menu", methods=["GET", "POST"])
 def menu():
+
     dishes = [
         {"name": "Sivagangai Chicken Biryani", "price": 150},
         {"name": "Sivagangai Mutton Biryani", "price": 200},
@@ -32,49 +33,39 @@ def menu():
         {"name": "Gulab Jamun", "price": 35}
     ]
 
+    # When user clicks "Place Order"
+    if request.method == "POST":
+
+        orders = []
+        total = 0
+
+        all_items = dishes + drinks + desserts
+
+        for item in all_items:
+
+            qty = int(request.form.get(item["name"], 0))
+
+            if qty > 0:
+
+                subtotal = item["price"] * qty
+
+                orders.append({
+                    "item": item["name"],
+                    "price": item["price"],
+                    "quantity": qty,
+                    "subtotal": subtotal
+                })
+
+                total += subtotal
+
+        return render_template("order.html", orders=orders, total=total)
+
     return render_template(
         "menu.html",
         dishes=dishes,
         drinks=drinks,
         desserts=desserts
     )
-
-
-# Order page
-@app.route("/order", methods=["POST"])
-def order():
-    orders = []
-    total = 0
-
-    menu_prices = {
-        "Sivagangai Chicken Biryani": 150,
-        "Sivagangai Mutton Biryani": 200,
-        "Plain Dosa": 50,
-        "Parotta": 40,
-        "Idly": 30,
-        "Coke": 20,
-        "Pepsi": 20,
-        "Sprite": 20,
-        "Fresh Lime Juice": 30,
-        "Vanilla Ice Cream": 40,
-        "Fruit Salad": 80,
-        "Gulab Jamun": 35
-    }
-
-    for item, price in menu_prices.items():
-        qty = int(request.form.get(item, 0))
-
-        if qty > 0:
-            subtotal = price * qty
-            orders.append({
-                "item": item,
-                "price": price,
-                "quantity": qty,
-                "subtotal": subtotal
-            })
-            total += subtotal
-
-    return render_template("order.html", orders=orders, total=total)
 
 
 if __name__ == "__main__":
