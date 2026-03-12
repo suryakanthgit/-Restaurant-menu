@@ -41,19 +41,40 @@ def menu():
 
 
 # Order page
-@app.route("/order", methods=["GET", "POST"])
+@app.route("/order", methods=["POST"])
 def order():
-    total_price = None
+    orders = []
+    total = 0
 
-    if request.method == "POST":
-        try:
-            price = int(request.form.get("price", 0))
-            quantity = int(request.form.get("quantity", 1))
-            total_price = price * quantity
-        except ValueError:
-            total_price = "Invalid input"
+    menu_prices = {
+        "Sivagangai Chicken Biryani": 150,
+        "Sivagangai Mutton Biryani": 200,
+        "Plain Dosa": 50,
+        "Parotta": 40,
+        "Idly": 30,
+        "Coke": 20,
+        "Pepsi": 20,
+        "Sprite": 20,
+        "Fresh Lime Juice": 30,
+        "Vanilla Ice Cream": 40,
+        "Fruit Salad": 80,
+        "Gulab Jamun": 35
+    }
 
-    return render_template("order.html", total_price=total_price)
+    for item, price in menu_prices.items():
+        qty = int(request.form.get(item, 0))
+
+        if qty > 0:
+            subtotal = price * qty
+            orders.append({
+                "item": item,
+                "price": price,
+                "quantity": qty,
+                "subtotal": subtotal
+            })
+            total += subtotal
+
+    return render_template("order.html", orders=orders, total=total)
 
 
 if __name__ == "__main__":
