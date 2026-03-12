@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
@@ -11,7 +11,6 @@ def home():
 # Menu page
 @app.route("/menu")
 def menu():
-
     dishes = [
         {"name": "Sivagangai Chicken Biryani", "price": 150},
         {"name": "Sivagangai Mutton Biryani", "price": 200},
@@ -42,9 +41,19 @@ def menu():
 
 
 # Order page
-@app.route("/order")
+@app.route("/order", methods=["GET", "POST"])
 def order():
-    return render_template("order.html")
+    total_price = None
+
+    if request.method == "POST":
+        try:
+            price = int(request.form.get("price", 0))
+            quantity = int(request.form.get("quantity", 1))
+            total_price = price * quantity
+        except ValueError:
+            total_price = "Invalid input"
+
+    return render_template("order.html", total_price=total_price)
 
 
 if __name__ == "__main__":
