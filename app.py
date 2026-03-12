@@ -8,6 +8,12 @@ def home():
     return render_template("home.html")
 
 
+# Health check endpoint (for cloud monitoring)
+@app.route("/health")
+def health():
+    return {"status": "running"}
+
+
 # Menu page
 @app.route("/menu", methods=["GET", "POST"])
 def menu():
