@@ -5,10 +5,10 @@ app = Flask(__name__)
 # Home page
 @app.route("/")
 def home():
-    return render_template("index.html")
+    return render_template("home.html")
 
 
-# Menu page (STATIC DATA – no database)
+# Menu page
 @app.route("/menu")
 def menu():
 
@@ -41,10 +41,10 @@ def menu():
     )
 
 
-# Address page
-@app.route("/address")
-def address():
-    return render_template("address.html")
+# Order page
+@app.route("/order")
+def order():
+    return render_template("order.html")
 
 
 if __name__ == "__main__":
